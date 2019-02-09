@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run frontend npm run test -- --coverage
+
+deploy:
+  provider: elasticbeastalk
+  region: "us-west-2"
+  app: "docker-kubernetes"
+  env: "DockerKubernetes-env"
+  bucket_name: "elasticbeanstalk-us-west-2-397384686540"
+  bucket_path: "docker-kubernetes"
+  on:
+    branch: master
+  access_key_id: "$aws-access-key"
+  secret_access_key:
+    secure: "$aws-secret-key"
